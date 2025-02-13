@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PlantBase - Identify and Learn About Plants</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    </head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">PlantBase</div>
+            <nav>
+                <ul>
+                    <li><a href="#try-it-out">Try It Out</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact-us">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="section hero">
+            <div class="container">
+                <h1>Upload. Identify. Learn</h1>
+                <p>Your plant image is a key to botanical knowledge. With PlantBase, you control what plant to identify and learn from it.</p>
+            </div>
+        </section>
+
+        <section id="try-it-out" class="section upload-section">
+            <div class="container">
+                <h2>Upload an Image</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="plantImage" class="custom-file-upload">Choose an Image</label>
+                        <input type="file" id="plantImage" name="plantImage" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn-upload">Upload Image</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section result-section">
+            <div class="container">
+                <div class="result-container">
+                    <div id="image-preview" class="image-preview">
+                        <h3>Image Preview</h3>
+                    </div>
+                    <div id="result"></div>
+                    <div id="loader" class="loader" style="display: none;"></div>
+                    <button id="knowMoreBtn" class="btn-know-more" style="display: none;">Know More</button>
+                    <div id="more-info"></div>
+                    <div id="map" style="height: 400px; display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <h3>1. Upload an Image</h3>
+                        <p>Choose and upload a clear image of the plant you want to identify.</p>
+                    </div>
+                    <div class="step">
+                        <h3>2. Identify the Plant</h3>
+                        <p>With the help of PlantNet API, we recognize and identify the plant in your image.</p>
+                    </div>
+                    <div class="step">
+                        <h3>3. Learn More</h3>
+                        <p>We provide additional information about the plant using data from Wikipedia and show its distribution on a map.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-us" class="section contact-us">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send">Send</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PlantBase. All rights reserved.</p>
+            <p>Useful links: <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

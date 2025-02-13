@@ -1,0 +1,427 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: rgba(15, 15, 30, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 4px 30px rgba(0, 255, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #00ff00;
+}
+
+/* Main Content */
+main {
+    flex: 1 0 auto;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #cccccc;
+}
+
+/* Upload Section */
+.upload-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.upload-section h2 {
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.file-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.custom-file-upload:hover {
+    background-color: rgba(0, 255, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+#plantImage {
+    display: none;
+}
+
+.btn-upload {
+    background-color: #00ff00;
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.btn-upload:hover {
+    background-color: #00cc00;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Result Section */
+.result-section {
+    padding: 60px 0;
+}
+
+.result-container {
+    background-color: rgba(26, 26, 46, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+}
+
+.image-preview {
+    margin-bottom: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(15, 15, 30, 0.5);
+    border-radius: 10px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+#result, #more-info {
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.btn-know-more {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.btn-know-more:hover {
+    background-color: rgba(0, 255, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    margin-bottom: 60px;
+    color: #ffffff;
+    font-size: 36px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.steps-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.step {
+    background-color: rgba(26, 26, 46, 0.8);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: calc(33.333% - 20px);
+    aspect-ratio: 1 / 1;
+    backdrop-filter: blur(10px);
+}
+
+.step:nth-child(1), .step:nth-child(3) {
+    transform: translateY(20px) scale(0.95);
+}
+
+.step:nth-child(2) {
+    transform: translateY(0) scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+}
+
+.step:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.4);
+}
+
+.step h3 {
+    color: #00ff00;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.step p {
+    color: #cccccc;
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: rgba(15, 15, 30, 0.8);
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 0;
+    width: 100%;
+    box-shadow: 0 -4px 30px rgba(0, 255, 0, 0.1);
+}
+
+footer a {
+    color: #00ff00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #00cc00;
+}
+
+/* Loader Styles */
+.loader {
+    border: 5px solid #1a1a2e;
+    border-top: 5px solid #00ff00;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Map Styles */
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .steps-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        width: 100%;
+        max-width: 300px;
+        transform: none !important;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .custom-file-upload, .btn-upload, .btn-know-more {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+/* ... (previous styles remain unchanged) ... */
+
+/* Contact Us Section */
+.contact-us {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.contact-us h2 {
+    margin-bottom: 40px;
+    color: #ffffff;
+    font-size: 36px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+#contactForm {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: rgba(26, 26, 46, 0.8);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00ff00;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(15, 15, 30, 0.8);
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.btn-send {
+    background-color: #00ff00;
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.btn-send:hover {
+    background-color: #00cc00;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+#more-info a {
+    color: #00ff00; /* Bright green color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#more-info a:hover {
+    color: #66ff66; /* Lighter green on hover */
+    text-decoration: underline;
+}
+/* ... (rest of the styles remain unchanged) ... */
