@@ -116,7 +116,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
 
 async function fetchAndDisplayDistribution(plantName) {
     try {
-        const response = await fetch(`/api/plant-distribution/${encodeURIComponent(plantName)}`);
+        const response = await fetch(`https://plantbase-production.up.railway.app/api/plant-distribution/${encodeURIComponent(plantName)}`);
         const distributionData = await response.json();
 
         if (distributionData.error) {
