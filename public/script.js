@@ -54,7 +54,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
 
     try {
         // Send image to the server
-        const response = await fetch('/upload', {
+        const response = await fetch('https://plantbase-production.up.railway.app/upload', {
             method: 'POST',
             body: formData,
         });
