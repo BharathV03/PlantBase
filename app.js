@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 import express from 'express';
 import multer from 'multer';
 import fetch from 'node-fetch';
-import path from 'path';
 import fs from 'fs';
 import cors from 'cors';
 import FormData from 'form-data';
