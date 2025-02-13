@@ -3,13 +3,17 @@ import multer from 'multer';
 import fetch from 'node-fetch';
 import path from 'path';
 import fs from 'fs';
+import cors from 'cors';
 import FormData from 'form-data';
 
 const app = express();
 const PORT = 3000;
 
-// Middleware to serve static files from "public" directory
-app.use(express.static('public'));
+// Enable CORS to allow frontend communication
+app.use(cors());
+
+// Middleware to serve static files from "public" directory (frontend files)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Multer setup for file uploads (storing in 'uploads' directory)
 const upload = multer({ dest: 'uploads/' });
@@ -20,6 +24,10 @@ const plantNetApiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=2b10
 // Endpoint to handle plant image upload and API request
 app.post('/upload', upload.single('plantImage'), async (req, res) => {
     try {
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded.' });
+        }
+
         const filePath = req.file.path;
 
         // Create a form to send to PlantNet API
@@ -41,19 +49,16 @@ app.post('/upload', upload.single('plantImage'), async (req, res) => {
         console.log('API Response:', JSON.stringify(result, null, 2));
 
         // Check if the API returned a valid plant identification result
-        if (result && result.results && result.results.length > 0) {
+        if (result?.results?.length > 0) {
             const plantDetails = result.results[0].species;
 
             // Extract the information
             const plantName = plantDetails.scientificNameWithoutAuthor || "Unknown";
-            const plantFamily = plantDetails.family.scientificName || "Unknown";
-            const plantGenus = plantDetails.genus.scientificName || "Unknown";
-
-            // Check if commonNames array exists and has elements
-            let commonNames = "No common names found";
-            if (plantDetails.commonNames && plantDetails.commonNames.length > 0) {
-                commonNames = plantDetails.commonNames.join(", ");
-            }
+            const plantFamily = plantDetails.family?.scientificName || "Unknown";
+            const plantGenus = plantDetails.genus?.scientificName || "Unknown";
+            const commonNames = plantDetails.commonNames?.length > 0 
+                ? plantDetails.commonNames.join(", ") 
+                : "No common names found";
 
             // Send the plant details in response
             res.json({
@@ -67,7 +72,7 @@ app.post('/upload', upload.single('plantImage'), async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        res.status(500).send({ error: 'Failed to identify the plant.' });
+        res.status(500).json({ error: 'Failed to identify the plant.' });
     }
 });
 
@@ -94,6 +99,7 @@ app.get('/api/plant-distribution/:plantName', async (req, res) => {
     }
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
