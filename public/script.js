@@ -1,3 +1,21 @@
+// Mobile menu functionality
+const mobileMenuButton = document.querySelector('.mobile-menu-button');
+const nav = document.querySelector('nav');
+
+mobileMenuButton.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    // Optional: animate hamburger to X
+    mobileMenuButton.classList.toggle('active');
+});
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        mobileMenuButton.classList.remove('active');
+    });
+});
+
 // Handle file selection (for displaying image preview and file name)
 document.getElementById('plantImage').addEventListener('change', function(event) {
     const fileInput = event.target;
