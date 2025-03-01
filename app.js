@@ -15,7 +15,7 @@ let currentPlant = null;
 
 const app = express();
 const PORT = 3000;
-const GEMINI_API_KEY = "AIzaSyBWX4P2QAkYIjtt-VHfKaDToVrTybyuxXU"
+const GEMINI_API_KEY = "AIzaSyA_qmZTZ5wuNY1uOtcGCzpqLb7_XJyxe8g"
 
 // Enable CORS to allow frontend communication
 app.use(cors());
