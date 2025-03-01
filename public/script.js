@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             // Send message to backend
-            const response = await fetch('/api/chat', {
+            const response = await fetch('https://plantbase-production.up.railway.app/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
