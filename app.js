@@ -11,6 +11,8 @@ import fs from 'fs';
 import cors from 'cors';
 import FormData from 'form-data';
 
+let currentPlant = null;
+
 const app = express();
 const PORT = 3000;
 const GEMINI_API_KEY = "AIzaSyBWX4P2QAkYIjtt-VHfKaDToVrTybyuxXU"
