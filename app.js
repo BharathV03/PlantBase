@@ -13,6 +13,7 @@ import FormData from 'form-data';
 
 const app = express();
 const PORT = 3000;
+const GEMINI_API_KEY = "AIzaSyBWX4P2QAkYIjtt-VHfKaDToVrTybyuxXU"
 
 // Enable CORS to allow frontend communication
 app.use(cors());
@@ -65,19 +66,97 @@ app.post('/upload', upload.single('plantImage'), async (req, res) => {
                 ? plantDetails.commonNames.join(", ") 
                 : "No common names found";
 
-            // Send the plant details in response
-            res.json({
+            // Update current plant for the chatbot context
+            currentPlant = {
                 name: plantName,
                 family: plantFamily,
                 genus: plantGenus,
                 commonNames: commonNames
-            });
+            };
+
+            // Send the plant details in response
+            res.json(currentPlant);
         } else {
+            currentPlant = null;
             res.json({ error: 'Plant not identified.' });
         }
     } catch (err) {
         console.error(err);
+        currentPlant = null;
         res.status(500).json({ error: 'Failed to identify the plant.' });
+    }
+});
+
+// Endpoint to handle chatbot messages
+app.post('/api/chat', express.json(), async (req, res) => {
+    try {
+        const { message } = req.body;
+        
+        if (!message) {
+            return res.status(400).json({ error: 'No message provided' });
+        }
+
+        // Prepare the system prompt based on whether we have a current plant
+        let systemPrompt = "You are a helpful plant assistant that ONLY discusses plants, trees, " +
+            "flowers, gardening, plant biology, plant geography, and closely related topics. " +
+            "If asked about anything else, politely explain that you can only discuss plant-related topics. " +
+            "Keep responses concise and educational. NEVER respond to questions about politics, technology, " + 
+            "current events, or anything that isn't related to plant life.";
+
+        // Add context about the current plant if available
+        if (currentPlant) {
+            systemPrompt += `\n\nThe user has recently identified a plant: ${currentPlant.name} ` +
+                `(Family: ${currentPlant.family}, Genus: ${currentPlant.genus}). ` +
+                `Common names include: ${currentPlant.commonNames}. Please incorporate this plant in your responses ` +
+                `when relevant, but still answer general plant-related questions when they ask about other plants.`;
+        }
+
+        // Make request to Gemini API
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            { text: systemPrompt }
+                        ]
+                    },
+                    {
+                        role: "model",
+                        parts: [
+                            { text: "I understand. I'll only discuss plants and related topics." }
+                        ]
+                    },
+                    {
+                        role: "user",
+                        parts: [
+                            { text: message }
+                        ]
+                    }
+                ]
+            })
+        });
+
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error.message || 'Error from Gemini API');
+        }
+
+        // Extract the response content
+        const botResponse = data.candidates[0].content.parts[0].text;
+        
+        res.json({ response: botResponse });
+    } catch (err) {
+        console.error('Chat API error:', err);
+        res.status(500).json({ 
+            error: 'Failed to process your message',
+            details: err.message
+        });
     }
 });
 

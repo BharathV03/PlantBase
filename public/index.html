@@ -113,5 +113,27 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Chat Bot Interface -->
+<div class="chat-container">
+    <button id="chat-bubble" class="chat-bubble">
+        <span class="chat-icon">🌱</span>
+    </button>
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <h3>PlantBase Chat</h3>
+            <button id="close-chat" class="close-chat">×</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot">
+                Hello! I'm your plant assistant. I can help you learn about plants. What would you like to know?
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask about plants...">
+            <button id="send-message" class="send-message">Send</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

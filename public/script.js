@@ -192,4 +192,90 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     this.reset();
 });
 
-// ... (rest of the JavaScript code remains unchanged) ...
+// Chat functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const chatBubble = document.getElementById('chat-bubble');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChat = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-message');
+    const messagesContainer = document.getElementById('chat-messages');
+    
+    // Open chat window when bubble is clicked
+    chatBubble.addEventListener('click', () => {
+        chatWindow.style.display = 'flex';
+        chatBubble.style.display = 'none';
+    });
+    
+    // Close chat window
+    closeChat.addEventListener('click', () => {
+        chatWindow.style.display = 'none';
+        chatBubble.style.display = 'flex';
+    });
+    
+    // Send message when button is clicked
+    sendButton.addEventListener('click', sendMessage);
+    
+    // Send message when Enter key is pressed
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    
+    // Function to send message
+    async function sendMessage() {
+        const message = chatInput.value.trim();
+        
+        if (!message) return;
+        
+        // Add user message to chat
+        addMessage(message, 'user');
+        chatInput.value = '';
+        
+        // Show typing indicator
+        const typingIndicator = document.createElement('div');
+        typingIndicator.className = 'typing-indicator';
+        typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+        messagesContainer.appendChild(typingIndicator);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        try {
+            // Send message to backend
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
+            
+            const data = await response.json();
+            
+            // Remove typing indicator
+            messagesContainer.removeChild(typingIndicator);
+            
+            if (data.error) {
+                addMessage('Sorry, I had trouble processing your request. Please try again.', 'bot');
+                console.error(data.error);
+            } else {
+                // Add bot response to chat
+                addMessage(data.response, 'bot');
+            }
+        } catch (error) {
+            // Remove typing indicator
+            messagesContainer.removeChild(typingIndicator);
+            addMessage('Sorry, I had trouble connecting. Please try again.', 'bot');
+            console.error('Error sending message:', error);
+        }
+    }
+    
+    // Function to add message to chat
+    function addMessage(text, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender}`;
+        messageElement.textContent = text;
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+});
