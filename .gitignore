@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains API keys)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Upload directory (temporary user uploads)
+uploads/
+
+# Build outputs
+dist/
+build/
+
+# Log files
+*.log

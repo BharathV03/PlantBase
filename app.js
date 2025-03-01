@@ -10,12 +10,14 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 import cors from 'cors';
 import FormData from 'form-data';
+import dotenv from 'dotenv';
+dotenv.config();
 
 let currentPlant = null;
 
 const app = express();
 const PORT = 3000;
-const GEMINI_API_KEY = "AIzaSyA_qmZTZ5wuNY1uOtcGCzpqLb7_XJyxe8g"
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 // Enable CORS to allow frontend communication
 app.use(cors());
@@ -27,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const upload = multer({ dest: 'uploads/' });
 
 // PlantNet API Key and Endpoint (replace with your actual API key)
-const plantNetApiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=2b10RQBsNWzbtfrwfKSDTRAnO`;
+const plantNetApiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.PLANTNET_API_KEY}`;
 
 // Endpoint to handle plant image upload and API request
 app.post('/upload', upload.single('plantImage'), async (req, res) => {
