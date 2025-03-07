@@ -152,9 +152,52 @@ async function fetchAndDisplayDistribution(plantName) {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
+        // Add map toggle controls
+        const mapControlsDiv = document.createElement('div');
+        mapControlsDiv.className = 'map-controls';
+        mapControlsDiv.innerHTML = `
+            <div class="map-toggle">
+                <button id="markers-btn" class="map-toggle-btn active">Markers</button>
+                <button id="heatmap-btn" class="map-toggle-btn">Heatmap</button>
+            </div>
+        `;
+
+        // Add the controls to the map container before the map
+        document.getElementById('map').parentNode.insertBefore(mapControlsDiv, document.getElementById('map'));
+
+        // Create marker layer and heatmap layer
+        const markers = L.layerGroup();
+
         // Add individual markers for each point
         distributionData.forEach(point => {
             L.marker([point.lat, point.lng]).addTo(map);
+        });
+
+        // Create heatmap data array
+        const heatData = distributionData.map(point => [point.lat, point.lng, 1]);
+        const heatmap = L.heatLayer(heatData, {
+            radius: 25,
+            blur: 15,
+            maxZoom: 10,
+            gradient: {0.4: 'blue', 0.65: 'lime', 1: 'red'}
+        });
+
+        // Initially show markers
+        markers.addTo(map);
+
+        // Add event listeners for toggle buttons
+        document.getElementById('markers-btn').addEventListener('click', () => {
+            document.getElementById('markers-btn').classList.add('active');
+            document.getElementById('heatmap-btn').classList.remove('active');
+            map.removeLayer(heatmap);
+            map.addLayer(markers);
+        });
+
+        document.getElementById('heatmap-btn').addEventListener('click', () => {
+            document.getElementById('heatmap-btn').classList.add('active');
+            document.getElementById('markers-btn').classList.remove('active');
+            map.removeLayer(markers);
+            map.addLayer(heatmap);
         });
 
         // Fit the map to the bounds of the data points

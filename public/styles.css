@@ -648,3 +648,35 @@ footer a:hover {
         right: 0;
     }
 }
+
+/* Map Control Styles */
+.map-controls {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.map-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.map-toggle-btn {
+    padding: 8px 16px;
+    background-color: #f1f5f9;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-toggle-btn:hover {
+    background-color: #e1f3e8;
+}
+
+.map-toggle-btn.active {
+    background-color: #16a34a;
+    color: white;
+    border-color: #16a34a;
+}
