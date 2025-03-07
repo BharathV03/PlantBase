@@ -170,7 +170,7 @@ async function fetchAndDisplayDistribution(plantName) {
 
         // Add individual markers for each point
         distributionData.forEach(point => {
-            L.marker([point.lat, point.lng]).addTo(map);
+            L.marker([point.lat, point.lng]).addTo(markers);
         });
 
         // Create heatmap data array
