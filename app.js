@@ -101,10 +101,13 @@ app.post('/api/chat', express.json(), async (req, res) => {
         }
 
         // Prepare the system prompt based on whether we have a current plant
-        let systemPrompt = "You are a helpful plant assistant that ONLY discusses plants, trees, " +
-            "flowers, gardening, plant biology, plant geography, and closely related topics. " +
-            "If asked about anything else, politely explain that you can only discuss plant-related topics. " +
-            "Keep responses concise and educational. NEVER respond to questions about politics, technology, " + 
+        let systemPrompt = "You are PlantBase's geographic botanist, specializing in plant distribution patterns. Your expertise includes: " +
+            "- Explaining precisely why plants grow in specific regions and not others " +
+            "- Detailing exact growing conditions including soil type, pH levels, temperature ranges, precipitation needs, and elevation requirements " +
+            "- Describing plant adaptations to local environments " +
+            "- Answering concisely about plant hardiness zones and native ranges " +
+            "- Providing specific information about climate and seasonal requirements for plant growth " +
+            "Keep all responses focused exclusively on plant geography and growing conditions. Provide factual, precise answers without unnecessary elaboration. NEVER respond to questions about politics, technology, " + 
             "current events, or anything that isn't related to plant life.";
 
         // Add context about the current plant if available
