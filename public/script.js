@@ -72,7 +72,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
 
     try {
         // Send image to the server
-        const response = await fetch('https://plantbase-production.up.railway.app/upload', {
+        const response = await fetch('https://plantbase-ml1n.onrender.com/upload', {
             method: 'POST',
             body: formData,
         });
@@ -134,7 +134,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
 
 async function fetchAndDisplayDistribution(plantName) {
     try {
-        const response = await fetch(`https://plantbase-production.up.railway.app/api/plant-distribution/${encodeURIComponent(plantName)}`);
+        const response = await fetch(`https://plantbase-ml1n.onrender.com/api/plant-distribution/${encodeURIComponent(plantName)}`);
         const distributionData = await response.json();
 
         if (distributionData.error) {
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             // Send message to backend
-            const response = await fetch('https://plantbase-production.up.railway.app/api/chat', {
+            const response = await fetch('https://plantbase-ml1n.onrender.com/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
