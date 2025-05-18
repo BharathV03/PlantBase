@@ -1,3 +1,9 @@
+import dns from 'dns';
+
+dns.lookup('my-api.plantnet.org', (err, address, family) => {
+  console.log('DNS Lookup:', err || address);
+});
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
