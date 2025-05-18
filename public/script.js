@@ -1,3 +1,7 @@
+marked.setOptions({
+  breaks: true, // Allows line breaks with single line returns
+});
+
 // Mobile menu functionality
 const mobileMenuButton = document.querySelector('.mobile-menu-button');
 const nav = document.querySelector('nav');
@@ -315,10 +319,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Function to add message to chat
     function addMessage(text, sender) {
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${sender}`;
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}`;
+
+    if (sender === 'bot') {
+        // Use marked to render Markdown as HTML
+        messageElement.innerHTML = marked.parse(text);
+    } else {
         messageElement.textContent = text;
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
+
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
 });
